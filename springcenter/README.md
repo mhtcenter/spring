@@ -1,0 +1,4 @@
+1. 创建接口
+2. 在interface实现类上标注@Component
+3. 在Config类上加注@Configuration和@ComponentScan
+默认会扫描该config类以及该Config类所在包的子包，当然也可以指定ComponentScan中的name属性
