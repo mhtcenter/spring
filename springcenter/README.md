@@ -41,6 +41,9 @@ Issues:
 解决办法：添加@ContextConfiguration注解
 
 
+5.Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: At least one JPA metamodel must be present!
+
+
 Knlowledge:
 1. @EnableAutoConfiguration 注解并不等同于@ComponentScan，而@SpringBootApplication注解则包含了上述两个注解
 2. @Configuration表示这是一个spring的配置类，并不是spring boot特有.一般将@Configuration和@Bean放一起。
