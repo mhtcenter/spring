@@ -11,27 +11,30 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import spring.hk.springcenter.component.CompactDisc;
+import spring.hk.springcenter.component.impl.CompactDiscImpl;
 
 @RunWith( SpringJUnit4ClassRunner.class)
 //@SpringBootTest
 //@SpringBootTest(classes = DataSourceConfig.class
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+@ContextConfiguration(classes=CompactDiscImpl.class)
 public class CompactDiscTest
 {
     @Autowired
     private CompactDisc disc;
     
     
-    @Autowired
+   /* @Autowired
     @Qualifier("primaryJdbcTemplate")
     protected JdbcTemplate jdbcTemplate1;
     
     @Autowired
     @Qualifier("secondaryJdbcTemplate")
-    protected JdbcTemplate jdbcTemplate2;
+    protected JdbcTemplate jdbcTemplate2;*/
     
     @Test
     public void discShouldNotNull(){

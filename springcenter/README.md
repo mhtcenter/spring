@@ -34,6 +34,12 @@ Issues:
 在初始化spring容器的过程中，会去默认检测是否存在datasource，那么此时我们需要告诉spring容器我们默认的datasource是哪个
 解决办法：添加spring.hk.springcenter.configuration.DataSourceConfig类
 
+4， 在CompactDiscTest中虽然有针对于接口CompactDisc的实现类，而且在SpringCenterApplication中也添加了SpringBootApplication注解，因为该注解包含了ComponentScan和EnableAutoConfiguration，但是CompactDiscImpl是在非test的package下配置，所以，怎样在test package下找到非test package下的component，
+用到了注解@ContextConfiguration，帮助你找到你的接口实现类。
+注意：@ContextConfiguration适用于一切该类型的issue
+
+解决办法：添加@ContextConfiguration注解
+
 
 Knlowledge:
 1. @EnableAutoConfiguration 注解并不等同于@ComponentScan，而@SpringBootApplication注解则包含了上述两个注解
