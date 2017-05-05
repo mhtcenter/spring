@@ -49,4 +49,76 @@ Knlowledge:
 等价于XML配置文件
 3. @Primay注解将会使得spring application使用标注了该注解的bean作为首要注入的bean,但是使用qualifier会更好
 4. @RunWith(SpringRunner.class) 告诉JUnit运行使用Spring的测试支持。SpringRunner是SpringJUnit4ClassRunner的新名字，这个名字只是让名字看起来简单些。
+4. EmberddedDatabaseBuilder 
+	Embedded databases tested :
 
+	HSQLDB 2.3.2
+	H2 1.4.187
+	Derby 10.11.1.1
+	<properties>
+		<spring.version>4.1.6.RELEASE</spring.version>
+		<hsqldb.version>2.3.2</hsqldb.version>
+		<dbh2.version>1.4.187</dbh2.version>
+		<derby.version>10.11.1.1</derby.version>
+	</properties>
+
+	<dependencies>
+	
+		<!-- Spring JDBC -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+	
+		<!-- HyperSQL DB -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>${hsqldb.version}</version>
+		</dependency>
+	
+		<!-- H2 DB -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${dbh2.version}</version>
+		</dependency>
+	
+		<!-- Derby DB -->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>${derby.version}</version>
+		</dependency>
+	
+	</dependencies>
+	
+	Example:
+	
+		@Bean
+		public DataSource dataSource() {
+	
+			// no need shutdown, EmbeddedDatabaseFactoryBean will take care of this
+			EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+			EmbeddedDatabase db = builder
+				.setType(EmbeddedDatabaseType.HSQL) //.H2 or .DERBY
+				.addScript("db/sql/create-db.sql")
+				.addScript("db/sql/insert-data.sql")
+				.build();
+			return db;
+		}
+	
+	调用类：
+	@ComponentScan({ "com.mkyong" })
+	@Configuration
+	public class SpringRootConfig {
+	
+		@Autowired
+		DataSource dataSource;
+	
+		@Bean
+		public JdbcTemplate getJdbcTemplate() {
+			return new JdbcTemplate(dataSource);
+		}
+		
