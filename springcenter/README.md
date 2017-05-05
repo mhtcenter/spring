@@ -184,3 +184,7 @@ Knlowledge:
 	</bean>
 	
 	
+	For above the EmberddedDatabaseBuilder example, visit the git: 					https://github.com/mkyong/spring-embedded-database
+	
+
+	
